@@ -1,0 +1,262 @@
+openapi: 3.0.3
+info:
+  title: Account Management API
+  description: REST API for account management with full CRUD operations
+  contact:
+    name: API Support
+    email: support@example.com
+  version: 1.0.0
+servers:
+- url: http://localhost:5555
+  description: Development server
+tags:
+- name: Accounts
+  description: CRUD operations for accounts
+paths:
+  /accounts:
+    get:
+      tags:
+      - Accounts
+      summary: Get all accounts
+      description: Returns a paginated list of all accounts
+      operationId: getAccounts
+      parameters:
+      - name: page
+        in: query
+        description: Page number (starts from 1)
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 1
+          type: integer
+          default: 1
+      - name: limit
+        in: query
+        description: Number of items per page
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          default: 20
+      - name: name
+        in: query
+        description: Search by account name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Accounts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /accounts/{id}:
+    get:
+      tags:
+      - Accounts
+      summary: Get account by ID
+      description: Returns details of a specific account
+      operationId: getAccountById
+      parameters:
+      - name: id
+        in: path
+        description: Unique account identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Account found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Account:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique account identifier
+          readOnly: true
+          example: 001gL000008OS1mQAG
+        name:
+          maxLength: 255
+          type: string
+          description: Account name
+          example: Blue Co
+        type:
+          maxLength: 100
+          type: string
+          description: Account type
+          example: Customer - Direct
+        description:
+          maxLength: 1000
+          type: string
+          description: Account description
+          example: Test IWHI
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+        contactInfo:
+          $ref: '#/components/schemas/ContactInfo'
+        creationDateTime:
+          type: string
+          description: Creation date and time
+          format: date-time
+          readOnly: true
+        lastUpdateDateTime:
+          type: string
+          description: Last update date and time
+          format: date-time
+          readOnly: true
+        isDeleted:
+          type: boolean
+          description: Indicates if the account is deleted
+          readOnly: true
+          example: false
+    Address:
+      type: object
+      properties:
+        street:
+          maxLength: 255
+          type: string
+          description: Street address
+          example: 1 rue de Rivoli
+        city:
+          maxLength: 100
+          type: string
+          description: City
+          example: Paris
+        state:
+          maxLength: 100
+          type: string
+          description: State/Province
+          nullable: true
+        postalCode:
+          maxLength: 20
+          type: string
+          description: Postal code
+          example: "75001"
+        country:
+          maxLength: 100
+          type: string
+          description: Country
+          example: France
+    ContactInfo:
+      type: object
+      properties:
+        phone:
+          maxLength: 20
+          type: string
+          description: Phone number
+          example: "+33123456780"
+        website:
+          maxLength: 255
+          type: string
+          description: Account website
+          format: uri
+          example: https://blueco.com
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Current page number
+          example: 1
+        limit:
+          type: integer
+          description: Number of items per page
+          example: 20
+        total:
+          type: integer
+          description: Total number of items
+          example: 150
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 8
+        hasNext:
+          type: boolean
+          description: Indicates if there is a next page
+          example: true
+        hasPrevious:
+          type: boolean
+          description: Indicates if there is a previous page
+          example: false
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: VALIDATION_ERROR
+        message:
+          type: string
+          description: Error message
+          example: Invalid input data
+        details:
+          type: array
+          description: Additional error details
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: Field with error
+                example: name
+              message:
+                type: string
+                description: Field-specific error message
+                example: Name is required
+        timestamp:
+          type: string
+          description: Error timestamp
+          format: date-time

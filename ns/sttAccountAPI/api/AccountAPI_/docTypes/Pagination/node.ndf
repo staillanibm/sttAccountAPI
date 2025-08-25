@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <record name="record" javaclass="com.wm.util.Values">
+    <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
+    <value name="node_nsName">sttAccountAPI.api.AccountAPI_.docTypes:Pagination</value>
+    <value name="node_pkg">sttAccountAPI</value>
+    <value name="is_public">false</value>
+    <value name="field_name">Pagination</value>
+    <value name="field_type">record</value>
+    <value name="field_dim">0</value>
+    <value name="field_opt">true</value>
+    <value name="field_is_jsonSchema">true</value>
+    <null name="title"/>
+    <null name="description"/>
+    <null name="readOnly"/>
+    <null name="writeOnly"/>
+    <array name="field_content_type" type="record" depth="1">
+      <record javaclass="com.wm.util.Values">
+        <record name="type" javaclass="com.wm.util.Values">
+          <value name="key">type</value>
+          <value name="value">object</value>
+          <value name="type">STRING</value>
+        </record>
+        <record name="extendedProperties" javaclass="com.wm.util.Values">
+          <record name="extensionName" javaclass="com.wm.util.Values">
+            <value name="key">extensionName</value>
+            <value name="value">openapi</value>
+            <value name="type">STRING</value>
+          </record>
+          <record name="extensionVersion" javaclass="com.wm.util.Values">
+            <value name="key">extensionVersion</value>
+            <value name="value">3.0.2</value>
+            <value name="type">STRING</value>
+          </record>
+        </record>
+      </record>
+    </array>
+    <value name="nillable">false</value>
+    <null name="wrapper_type"/>
+    <array name="rec_fields" type="record" depth="1">
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">page</value>
+        <value name="field_type">object</value>
+        <value name="field_dim">0</value>
+        <value name="field_opt">true</value>
+        <value name="field_is_jsonSchema">true</value>
+        <null name="title"/>
+        <value name="description">Current page number</value>
+        <null name="readOnly"/>
+        <null name="writeOnly"/>
+        <array name="field_content_type" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">
+            <record name="type" javaclass="com.wm.util.Values">
+              <value name="key">type</value>
+              <value name="value">integer</value>
+              <value name="type">STRING</value>
+            </record>
+            <record name="extendedProperties" javaclass="com.wm.util.Values">
+              <record name="extensionName" javaclass="com.wm.util.Values">
+                <value name="key">extensionName</value>
+                <value name="value">openapi</value>
+                <value name="type">STRING</value>
+              </record>
+              <record name="extensionVersion" javaclass="com.wm.util.Values">
+                <value name="key">extensionVersion</value>
+                <value name="value">3.0.2</value>
+                <value name="type">STRING</value>
+              </record>
+            </record>
+          </record>
+        </array>
+        <value name="nillable">false</value>
+        <value name="wrapper_type">java.math.BigInteger</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">limit</value>
+        <value name="field_type">object</value>
+        <value name="field_dim">0</value>
+        <value name="field_opt">true</value>
+        <value name="field_is_jsonSchema">true</value>
+        <null name="title"/>
+        <value name="description">Number of items per page</value>
+        <null name="readOnly"/>
+        <null name="writeOnly"/>
+        <array name="field_content_type" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">
+            <record name="type" javaclass="com.wm.util.Values">
+              <value name="key">type</value>
+              <value name="value">integer</value>
+              <value name="type">STRING</value>
+            </record>
+            <record name="extendedProperties" javaclass="com.wm.util.Values">
+              <record name="extensionName" javaclass="com.wm.util.Values">
+                <value name="key">extensionName</value>
+                <value name="value">openapi</value>
+                <value name="type">STRING</value>
+              </record>
+              <record name="extensionVersion" javaclass="com.wm.util.Values">
+                <value name="key">extensionVersion</value>
+                <value name="value">3.0.2</value>
+                <value name="type">STRING</value>
+              </record>
+            </record>
+          </record>
+        </array>
+        <value name="nillable">false</value>
+        <value name="wrapper_type">java.math.BigInteger</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">total</value>
+        <value name="field_type">object</value>
+        <value name="field_dim">0</value>
+        <value name="field_opt">true</value>
+        <value name="field_is_jsonSchema">true</value>
+        <null name="title"/>
+        <value name="description">Total number of items</value>
+        <null name="readOnly"/>
+        <null name="writeOnly"/>
+        <array name="field_content_type" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">
+            <record name="type" javaclass="com.wm.util.Values">
+              <value name="key">type</value>
+              <value name="value">integer</value>
+              <value name="type">STRING</value>
+            </record>
+            <record name="extendedProperties" javaclass="com.wm.util.Values">
+              <record name="extensionName" javaclass="com.wm.util.Values">
+                <value name="key">extensionName</value>
+                <value name="value">openapi</value>
+                <value name="type">STRING</value>
+              </record>
+              <record name="extensionVersion" javaclass="com.wm.util.Values">
+                <value name="key">extensionVersion</value>
+                <value name="value">3.0.2</value>
+                <value name="type">STRING</value>
+              </record>
+            </record>
+          </record>
+        </array>
+        <value name="nillable">false</value>
+        <value name="wrapper_type">java.math.BigInteger</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">totalPages</value>
+        <value name="field_type">object</value>
+        <value name="field_dim">0</value>
+        <value name="field_opt">true</value>
+        <value name="field_is_jsonSchema">true</value>
+        <null name="title"/>
+        <value name="description">Total number of pages</value>
+        <null name="readOnly"/>
+        <null name="writeOnly"/>
+        <array name="field_content_type" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">
+            <record name="type" javaclass="com.wm.util.Values">
+              <value name="key">type</value>
+              <value name="value">integer</value>
+              <value name="type">STRING</value>
+            </record>
+            <record name="extendedProperties" javaclass="com.wm.util.Values">
+              <record name="extensionName" javaclass="com.wm.util.Values">
+                <value name="key">extensionName</value>
+                <value name="value">openapi</value>
+                <value name="type">STRING</value>
+              </record>
+              <record name="extensionVersion" javaclass="com.wm.util.Values">
+                <value name="key">extensionVersion</value>
+                <value name="value">3.0.2</value>
+                <value name="type">STRING</value>
+              </record>
+            </record>
+          </record>
+        </array>
+        <value name="nillable">false</value>
+        <value name="wrapper_type">java.math.BigInteger</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">hasNext</value>
+        <value name="field_type">object</value>
+        <value name="field_dim">0</value>
+        <value name="field_opt">true</value>
+        <value name="field_is_jsonSchema">true</value>
+        <null name="title"/>
+        <value name="description">Indicates if there is a next page</value>
+        <null name="readOnly"/>
+        <null name="writeOnly"/>
+        <array name="field_content_type" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">
+            <record name="type" javaclass="com.wm.util.Values">
+              <value name="key">type</value>
+              <value name="value">boolean</value>
+              <value name="type">STRING</value>
+            </record>
+            <record name="extendedProperties" javaclass="com.wm.util.Values">
+              <record name="extensionName" javaclass="com.wm.util.Values">
+                <value name="key">extensionName</value>
+                <value name="value">openapi</value>
+                <value name="type">STRING</value>
+              </record>
+              <record name="extensionVersion" javaclass="com.wm.util.Values">
+                <value name="key">extensionVersion</value>
+                <value name="value">3.0.2</value>
+                <value name="type">STRING</value>
+              </record>
+            </record>
+          </record>
+        </array>
+        <value name="nillable">false</value>
+        <value name="wrapper_type">java.lang.Boolean</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">hasPrevious</value>
+        <value name="field_type">object</value>
+        <value name="field_dim">0</value>
+        <value name="field_opt">true</value>
+        <value name="field_is_jsonSchema">true</value>
+        <null name="title"/>
+        <value name="description">Indicates if there is a previous page</value>
+        <null name="readOnly"/>
+        <null name="writeOnly"/>
+        <array name="field_content_type" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">
+            <record name="type" javaclass="com.wm.util.Values">
+              <value name="key">type</value>
+              <value name="value">boolean</value>
+              <value name="type">STRING</value>
+            </record>
+            <record name="extendedProperties" javaclass="com.wm.util.Values">
+              <record name="extensionName" javaclass="com.wm.util.Values">
+                <value name="key">extensionName</value>
+                <value name="value">openapi</value>
+                <value name="type">STRING</value>
+              </record>
+              <record name="extensionVersion" javaclass="com.wm.util.Values">
+                <value name="key">extensionVersion</value>
+                <value name="value">3.0.2</value>
+                <value name="type">STRING</value>
+              </record>
+            </record>
+          </record>
+        </array>
+        <value name="nillable">false</value>
+        <value name="wrapper_type">java.lang.Boolean</value>
+      </record>
+    </array>
+    <null name="rec_closed"/>
+    <null name="schemaRegistered"/>
+    <value name="modifiable">false</value>
+    <null name="schemaCompliant"/>
+    <null name="elementWrapper"/>
+    <null name="wrappedElement"/>
+    <value name="UNLOCK_REQUIRED">true</value>
+  </record>
+</Values>
