@@ -1,0 +1,12 @@
+services:
+  msr:
+    image: ${IMAGE}:${TAG}
+    container_name: ${DEPLOYMENT}
+    ports:
+      - "15555:5555"
+    env_file:
+      - .env
+    volumes:
+      - ./application.properties:/opt/softwareag/IntegrationServer/application.properties
+
+

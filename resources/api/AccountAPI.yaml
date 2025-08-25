@@ -1,0 +1,266 @@
+openapi: 3.0.3
+info:
+  title: Account Management API
+  description: REST API for account management with full CRUD operations
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+
+servers:
+  - url: http://localhost:5555
+    description: Development server
+
+paths:
+  /accounts:
+    get:
+      summary: Get all accounts
+      description: Returns a paginated list of all accounts
+      operationId: getAccounts
+      tags:
+        - Accounts
+      parameters:
+        - name: page
+          in: query
+          description: Page number (starts from 1)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: name
+          in: query
+          description: Search by account name
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Accounts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /accounts/{id}:
+    get:
+      summary: Get account by ID
+      description: Returns details of a specific account
+      operationId: getAccountById
+      tags:
+        - Accounts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique account identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Account:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          description: Unique account identifier
+          example: "001gL000008OS1mQAG"
+          readOnly: true
+        name:
+          type: string
+          description: Account name
+          example: "Blue Co"
+          maxLength: 255
+        type:
+          type: string
+          description: Account type
+          example: "Customer - Direct"
+          maxLength: 100
+        description:
+          type: string
+          description: Account description
+          example: "Test IWHI"
+          maxLength: 1000
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+        contactInfo:
+          $ref: '#/components/schemas/ContactInfo'
+        creationDateTime:
+          type: string
+          format: date-time
+          description: Creation date and time
+          example: "2025-06-05T18:05:54.000+0000"
+          readOnly: true
+        lastUpdateDateTime:
+          type: string
+          format: date-time
+          description: Last update date and time
+          example: "2025-07-02T13:53:56.000+0000"
+          readOnly: true
+        isDeleted:
+          type: boolean
+          description: Indicates if the account is deleted
+          example: false
+          readOnly: true
+
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          description: Street address
+          example: "1 rue de Rivoli"
+          maxLength: 255
+        city:
+          type: string
+          description: City
+          example: "Paris"
+          maxLength: 100
+        state:
+          type: string
+          nullable: true
+          description: State/Province
+          maxLength: 100
+        postalCode:
+          type: string
+          description: Postal code
+          example: "75001"
+          maxLength: 20
+        country:
+          type: string
+          description: Country
+          example: "France"
+          maxLength: 100
+
+    ContactInfo:
+      type: object
+      properties:
+        phone:
+          type: string
+          description: Phone number
+          example: "+33123456780"
+          maxLength: 20
+        website:
+          type: string
+          format: uri
+          description: Account website
+          example: "https://blueco.com"
+          maxLength: 255
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Current page number
+          example: 1
+        limit:
+          type: integer
+          description: Number of items per page
+          example: 20
+        total:
+          type: integer
+          description: Total number of items
+          example: 150
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 8
+        hasNext:
+          type: boolean
+          description: Indicates if there is a next page
+          example: true
+        hasPrevious:
+          type: boolean
+          description: Indicates if there is a previous page
+          example: false
+
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: "VALIDATION_ERROR"
+        message:
+          type: string
+          description: Error message
+          example: "Invalid input data"
+        details:
+          type: array
+          description: Additional error details
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: Field with error
+                example: "name"
+              message:
+                type: string
+                description: Field-specific error message
+                example: "Name is required"
+        timestamp:
+          type: string
+          format: date-time
+          description: Error timestamp
+          example: "2025-07-02T13:53:56.000+0000"
+
+tags:
+  - name: Accounts
+    description: CRUD operations for accounts
