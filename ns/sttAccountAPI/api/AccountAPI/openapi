@@ -1,14 +1,13 @@
 openapi: 3.0.3
 info:
-  title: Account Management API
-  description: REST API for account management with full CRUD operations
-  contact:
-    name: API Support
-    email: support@example.com
+  title: AccountAPI
+  description: REST API for account management
   version: 1.0.0
 servers:
 - url: http://localhost:5555
   description: Development server
+security:
+- basicAuth: []
 tags:
 - name: Accounts
   description: CRUD operations for accounts
@@ -21,35 +20,14 @@ paths:
       description: Returns a paginated list of all accounts
       operationId: getAccounts
       parameters:
-      - name: page
-        in: query
-        description: Page number (starts from 1)
+      - name: Authorization
+        in: header
         required: false
-        style: form
-        explode: true
-        schema:
-          minimum: 1
-          type: integer
-          default: 1
-      - name: limit
-        in: query
-        description: Number of items per page
-        required: false
-        style: form
-        explode: true
-        schema:
-          maximum: 100
-          minimum: 1
-          type: integer
-          default: 20
-      - name: name
-        in: query
-        description: Search by account name
-        required: false
-        style: form
-        explode: true
+        style: simple
+        explode: false
         schema:
           type: string
+          example: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
       responses:
         "200":
           description: Accounts retrieved successfully
@@ -62,8 +40,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Account'
-                  pagination:
-                    $ref: '#/components/schemas/Pagination'
         "400":
           description: Bad request
           content:
@@ -76,6 +52,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+      - basicAuth: []
   /accounts/{id}:
     get:
       tags:
@@ -84,6 +62,14 @@ paths:
       description: Returns details of a specific account
       operationId: getAccountById
       parameters:
+      - name: Authorization
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
       - name: id
         in: path
         description: Unique account identifier
@@ -111,6 +97,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+      - basicAuth: []
 components:
   schemas:
     Account:
@@ -201,33 +189,6 @@ components:
           description: Account website
           format: uri
           example: https://blueco.com
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-          description: Current page number
-          example: 1
-        limit:
-          type: integer
-          description: Number of items per page
-          example: 20
-        total:
-          type: integer
-          description: Total number of items
-          example: 150
-        totalPages:
-          type: integer
-          description: Total number of pages
-          example: 8
-        hasNext:
-          type: boolean
-          description: Indicates if there is a next page
-          example: true
-        hasPrevious:
-          type: boolean
-          description: Indicates if there is a previous page
-          example: false
     Error:
       required:
       - code
@@ -260,3 +221,7 @@ components:
           type: string
           description: Error timestamp
           format: date-time
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

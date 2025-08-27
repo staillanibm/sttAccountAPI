@@ -28,7 +28,7 @@
       </record>
     </array>
   </record>
-  <value name="originUri">file:///Users/staillan/git/sttCustomerManagement/resources/api/AccountAPI.yaml</value>
+  <value name="originUri">file:///Users/staillan/dev/wmServiceDesigner11.1.202506/wMServiceDesigner/IntegrationServer/packages/sttAccountAPI/resources/api/AccountAPI.yaml</value>
   <value name="resourceName">Accounts</value>
   <Boolean name="modifiable">false</Boolean>
   <null name="srcdoctypename"/>

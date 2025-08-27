@@ -1,11 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Account Management API
-  description: REST API for account management with full CRUD operations
+  title: AccountAPI
+  description: REST API for account management 
   version: 1.0.0
-  contact:
-    name: API Support
-    email: support@example.com
 
 servers:
   - url: http://localhost:5555
@@ -19,30 +16,8 @@ paths:
       operationId: getAccounts
       tags:
         - Accounts
-      parameters:
-        - name: page
-          in: query
-          description: Page number (starts from 1)
-          required: false
-          schema:
-            type: integer
-            minimum: 1
-            default: 1
-        - name: limit
-          in: query
-          description: Number of items per page
-          required: false
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
-            default: 20
-        - name: name
-          in: query
-          description: Search by account name
-          required: false
-          schema:
-            type: string
+      security:
+        - basicAuth: []
       responses:
         '200':
           description: Accounts retrieved successfully
@@ -55,8 +30,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Account'
-                  pagination:
-                    $ref: '#/components/schemas/Pagination'
         '400':
           description: Bad request
           content:
@@ -77,6 +50,8 @@ paths:
       operationId: getAccountById
       tags:
         - Accounts
+      security:
+        - basicAuth: []
       parameters:
         - name: id
           in: path
@@ -105,6 +80,11 @@ paths:
                 $ref: '#/components/schemas/Error'
 
 components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+
   schemas:
     Account:
       type: object
@@ -199,34 +179,6 @@ components:
           example: "https://blueco.com"
           maxLength: 255
 
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-          description: Current page number
-          example: 1
-        limit:
-          type: integer
-          description: Number of items per page
-          example: 20
-        total:
-          type: integer
-          description: Total number of items
-          example: 150
-        totalPages:
-          type: integer
-          description: Total number of pages
-          example: 8
-        hasNext:
-          type: boolean
-          description: Indicates if there is a next page
-          example: true
-        hasPrevious:
-          type: boolean
-          description: Indicates if there is a previous page
-          example: false
-
     Error:
       type: object
       required:
@@ -260,6 +212,9 @@ components:
           format: date-time
           description: Error timestamp
           example: "2025-07-02T13:53:56.000+0000"
+
+security:
+  - basicAuth: []
 
 tags:
   - name: Accounts
